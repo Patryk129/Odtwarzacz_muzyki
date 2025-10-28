@@ -22,10 +22,10 @@
         </Grid>
     </Grid>
         <Grid Grid.Row="2" RowDefinitions="*" ColumnDefinitions="*,*,*,*">
-            <ImageButton WidthRequest="50" HeightRequest="50" Grid.Row="0" Grid.Column="0" Source="home_icon.png"/>
-            <ImageButton WidthRequest="50" HeightRequest="50" Grid.Row="0" Grid.Column="1" Source="search_icon.png"/>
-            <ImageButton WidthRequest="50" HeightRequest="50" Grid.Row="0" Grid.Column="2" Source="files_icon.png"/>
-            <ImageButton WidthRequest="50" HeightRequest="50" Grid.Row="0" Grid.Column="3" Source="account_icon.png"/>
+            <ImageButton WidthRequest="50" HeightRequest="50" Grid.Row="0" Grid.Column="0" Source="home_icon_active.png" Clicked="Home_Clicked"/>
+            <ImageButton WidthRequest="50" HeightRequest="50" Grid.Row="0" Grid.Column="1" Source="search_icon.png" Clicked="Search_Clicked"/>
+            <ImageButton WidthRequest="50" HeightRequest="50" Grid.Row="0" Grid.Column="2" Source="files_icon.png" Clicked="Files_Clicked"/>
+            <ImageButton WidthRequest="50" HeightRequest="50" Grid.Row="0" Grid.Column="3" Source="account_icon.png" Clicked="Account_Clicked"/>
         </Grid>
     </Grid>
 

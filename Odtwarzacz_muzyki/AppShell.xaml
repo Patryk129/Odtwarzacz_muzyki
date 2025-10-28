@@ -7,8 +7,14 @@
     Title="Odtwarzacz_muzyki">
 
     <ShellContent
-        Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
+    <ShellContent
+        ContentTemplate="{DataTemplate local:SearchPage}"
+        Route="SearchPage" />
+
+    <ShellContent
+        ContentTemplate="{DataTemplate local:AccountPage}"
+        Route="AccountPage" />
 
 </Shell>
