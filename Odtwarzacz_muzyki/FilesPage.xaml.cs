@@ -86,14 +86,39 @@ public partial class FilesPage : ContentPage
             Console.WriteLine($"Błąd odczytu piosenek: {ex.Message}");
         }
     }
+    private bool _isPlaying = false;
     private void PlayButton_Clicked(object sender, EventArgs e)
     {
-        if (_songs.Count == 0) return;
-        if (_currentIndex == -1) _currentIndex = 0;
+        try
+        {
+            if (_songs.Count == 0) return;
+            if (_currentIndex == -1) _currentIndex = 0;
 
-        Player.Source = _songs[_currentIndex].Path;
-        Player.Play();
+            var path = _songs[_currentIndex].Path;
+            if (string.IsNullOrEmpty(path)) return;
 
-        //SongTitle.Text = $"▶ {_songs[_currentIndex].Title}";
+            // Jeśli player nie ma jeszcze źródła — ustaw tylko raz
+            if (Player.Source == null)
+                Player.Source = path;
+
+            if (!_isPlaying)
+            {
+                // Wznów lub rozpocznij odtwarzanie
+                Player.Play();
+                PlayButton.Source = "pause_icon.png";
+                _isPlaying = true;
+            }
+            else
+            {
+                // Pauza (nie stop!)
+                Player.Pause();
+                PlayButton.Source = "play_icon.png";
+                _isPlaying = false;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Błąd: {ex.Message}");
+        }
     }
 }

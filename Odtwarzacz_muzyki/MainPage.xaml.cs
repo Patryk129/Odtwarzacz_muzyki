@@ -16,7 +16,7 @@ namespace Odtwarzacz_muzyki
 
            
 
-            _ = LoadSongsAsync();
+            //_ = LoadSongsAsync();
         }
         //private async void Files_Clicked(object sender, EventArgs e)
         //{
@@ -66,64 +66,70 @@ namespace Odtwarzacz_muzyki
             }
         }
 
-        private async Task LoadSongsAsync()
-        {
-            try
-            {
-                if (File.Exists(_songsFilePath))
-                {
-                    var json = await File.ReadAllTextAsync(_songsFilePath);
-                    var loadedSongs = JsonSerializer.Deserialize<ObservableCollection<Song>>(json);
+        //private async Task LoadSongsAsync()
+        //{
+        //    try
+        //    {
+        //        if (File.Exists(_songsFilePath))
+        //        {
+        //            var json = await File.ReadAllTextAsync(_songsFilePath);
+        //            var loadedSongs = JsonSerializer.Deserialize<ObservableCollection<Song>>(json);
 
-                    if (loadedSongs != null)
-                    {
-                        _songs.Clear();
-                        foreach (var song in loadedSongs)
-                            _songs.Add(song);
-                    }
-                }
-                if(_songs.Count > 0)
-                {
-                    _currentIndex = 0;
-                    SongTitle.Text = _songs[_currentIndex].Title;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Błąd odczytu piosenek: {ex.Message}");
-            }
-        }
-        private bool _isPlaying = false;
+        //            if (loadedSongs != null)
+        //            {
+        //                _songs.Clear();
+        //                foreach (var song in loadedSongs)
+        //                    _songs.Add(song);
+        //            }
+        //        }
+        //        if(_songs.Count > 0)
+        //        {
+        //            _currentIndex = 0;
+        //            SongTitle.Text = _songs[_currentIndex].Title;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Błąd odczytu piosenek: {ex.Message}");
+        //    }
+        //}
+        //private bool _isPlaying = false;
 
-        private void PlayButton_Clicked(object sender, EventArgs e)
-        {
-            try
-            {
-                if (_songs.Count == 0) return;
-                if (_currentIndex == -1) _currentIndex = 0;
+        //private void PlayButton_Clicked(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (_songs.Count == 0) return;
+        //        if (_currentIndex == -1) _currentIndex = 0;
 
-                var path = _songs[_currentIndex].Path;
-                if (string.IsNullOrEmpty(path)) return;
+        //        var path = _songs[_currentIndex].Path;
+        //        if (string.IsNullOrEmpty(path)) return;
 
-                if (!_isPlaying)
-                {
-                    Player.Source = path;
-                    Player.Play();
-                    PlayButton.Source = "pause_icon.png";
-                    _isPlaying = true;
-                }
-                else
-                {
-                    Player.Stop();
-                    PlayButton.Source = "play_icon.png";
-                    _isPlaying = false;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Błąd: {ex.Message}");
-            }
-        }
+        //        // Jeśli player nie ma jeszcze źródła — ustaw tylko raz
+        //        if (Player.Source == null)
+        //            Player.Source = path;
+
+        //        if (!_isPlaying)
+        //        {
+        //            // Wznów lub rozpocznij odtwarzanie
+        //            Player.Play();
+        //            PlayButton.Source = "pause_icon.png";
+        //            _isPlaying = true;
+        //        }
+        //        else
+        //        {
+        //            // Pauza (nie stop!)
+        //            Player.Pause();
+        //            PlayButton.Source = "play_icon.png";
+        //            _isPlaying = false;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Błąd: {ex.Message}");
+        //    }
+        //}
+
 
         private async void Files_Clicked(object sender, EventArgs e)
         {

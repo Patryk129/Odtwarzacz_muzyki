@@ -8,15 +8,15 @@
     Title="Odtwarzacz_muzyki"
     FlyoutBehavior="Disabled">
 
-
-    <ShellContent
+        <ShellContent
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
-    <ShellContent
+        <ShellContent
         ContentTemplate="{DataTemplate local:SearchPage}"
         Route="SearchPage" />
 
-    <ShellContent
+        <ShellContent
         ContentTemplate="{DataTemplate local:AccountPage}"
         Route="AccountPage" />
+
 </Shell>

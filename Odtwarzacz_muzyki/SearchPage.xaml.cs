@@ -29,16 +29,6 @@ public partial class SearchPage : ContentPage
     {
         await Shell.Current.GoToAsync("//AccountPage");
     }
-    private void PlayButton_Clicked(object sender, EventArgs e)
-    {
-        if (_songs.Count == 0) return;
-        if (_currentIndex == -1) _currentIndex = 0;
-
-        Player.Source = _songs[_currentIndex].Path;
-        Player.Play();
-
-        //SongTitle.Text = $"▶ {_songs[_currentIndex].Title}";
-    }
     private async Task SaveSongsAsync()
     {
         try
@@ -78,4 +68,36 @@ public partial class SearchPage : ContentPage
     {
         await Navigation.PushAsync(new FilesPage(_songs));
     }
+    private bool _isPlaying = false;
+    //private void PlayButton_Clicked(object sender, EventArgs e)
+    //{
+    //    try
+    //    {
+    //        if (_songs.Count == 0) return;
+    //        if (_currentIndex == -1) _currentIndex = 0;
+
+    //        var path = _songs[_currentIndex].Path;
+    //        if (string.IsNullOrEmpty(path)) return;
+
+    //        if (Player.Source == null)
+    //            Player.Source = path;
+
+    //        if (!_isPlaying)
+    //        {
+    //            Player.Play();
+    //            PlayButton.Source = "pause_icon.png";
+    //            _isPlaying = true;
+    //        }
+    //        else
+    //        {
+    //            Player.Pause();
+    //            PlayButton.Source = "play_icon.png";
+    //            _isPlaying = false;
+    //        }
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        Console.WriteLine($"Błąd: {ex.Message}");
+    //    }
+    //}
 }
