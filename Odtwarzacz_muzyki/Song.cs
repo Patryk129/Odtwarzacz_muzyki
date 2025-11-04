@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Odtwarzacz_muzyki
 {
-    internal class Song
+    public class Song
     {
         public string Title { get; set; }
         public string Path { get; set; }

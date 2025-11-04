@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="Odtwarzacz_muzyki.FilesPage"
+             BackgroundColor="#2F2D2D">
+    <VerticalStackLayout>
+        <Button Clicked="Add_Clicked" Text="ADD FILES"/>
+        <toolkit:MediaElement x:Name="Player" IsVisible="False"/>
+        <CollectionView Grid.Row="0" x:Name="SongsCollectionView">
+            <!--<Grid.ColumnSpan="3" Margin="5"-->
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <!--<HorizontalStackLayout>
+            <Label Text="{Binding Title}"/>
+        </HorizontalStackLayout>-->
+                    <Grid  RowDefinitions="*,*" ColumnDefinitions="*,*,auto" BackgroundColor="#333533" HeightRequest="80" VerticalOptions="Start" Margin="0,55,0,0">
+                        <ImageButton WidthRequest="80" HeightRequest="80" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="1"  Source="dotnet_bot.png"/>
+                        <Label Text="{Binding Title}" Grid.Column="1" Grid.Row="0" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" />
+                        <Label Text="Artist" Grid.Column="1" Grid.Row="1" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <ImageButton WidthRequest="50" HeightRequest="50" Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="1"  Source="play_icon.png" Clicked="PlayButton_Clicked"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

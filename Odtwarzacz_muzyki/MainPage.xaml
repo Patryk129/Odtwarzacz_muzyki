@@ -1,28 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Odtwarzacz_muzyki.MainPage"
              BackgroundColor="#2F2D2D">
-    
     <Grid RowDefinitions="auto,*,auto" ColumnDefinitions="*">
-        
-        <CollectionView Grid.Row="0" x:Name="SongsCollectionView">
-            <!--<Grid.ColumnSpan="3" Margin="5"-->
+        <toolkit:MediaElement x:Name="Player" IsVisible="False"/>
+        <Grid Grid.Row="0"  RowDefinitions="*,*" ColumnDefinitions="*,*,auto" BackgroundColor="#333533" HeightRequest="80" VerticalOptions="Start" Margin="0,55,0,0">
+            <ImageButton x:Name="SongCover" WidthRequest="80" HeightRequest="80" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="1"  Source="dotnet_bot.png"/>
+            <Label x:Name="SongTitle" Grid.Column="1" Grid.Row="0" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Label x:Name="Artist" Text="Artist" Grid.Column="1" Grid.Row="1" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <ImageButton x:Name="PlayButton" WidthRequest="50" HeightRequest="50" Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="1"  Source="play_icon.png" Clicked="PlayButton_Clicked"/>
+        </Grid>
+        <!--<CollectionView Grid.Row="0" x:Name="SongsCollectionView">
+            <Grid.ColumnSpan="3" Margin="5"
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <!--<HorizontalStackLayout>
+                       <HorizontalStackLayout>
                             <Label Text="{Binding Title}"/>
-                        </HorizontalStackLayout>-->
-                    <Grid  RowDefinitions="*,*" ColumnDefinitions="*,*,auto" BackgroundColor="#333533" HeightRequest="80" VerticalOptions="Start" Margin="0,55,0,0">
-                        <ImageButton WidthRequest="80" HeightRequest="80" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="1"  Source="dotnet_bot.png"/>
-                        <Label Text="{Binding Title}" Grid.Column="1" Grid.Row="0" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" x:Name="SongTitle"/>
-                        <Label Text="Artist" Grid.Column="1" Grid.Row="1" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
-                        <ImageButton WidthRequest="50" HeightRequest="50" Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="1"  Source="play_icon.png" Clicked="PlayButton_Clicked"/>
-                    </Grid>
+                        </HorizontalStackLayout>
+                    
                 </DataTemplate>
                 </CollectionView.ItemTemplate>
-            </CollectionView>
-       
+        </CollectionView> -->
+
         <Grid Grid.Row="1" RowDefinitions="auto,auto,auto" ColumnDefinitions="*" Margin="0,30,0,0">
             <Label Grid.Row="0" Grid.Column="0" Text="Ostatnio słuchane" TextColor="White"/>
             <Grid Grid.Row="1" RowDefinitions="*" ColumnDefinitions="*,*" BackgroundColor="#333533" HeightRequest="80" Margin="0,10,0,0">

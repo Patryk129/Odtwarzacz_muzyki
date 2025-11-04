@@ -1,4 +1,6 @@
-﻿namespace Odtwarzacz_muzyki
+﻿using System.Collections.ObjectModel;
+
+namespace Odtwarzacz_muzyki
 {
     public partial class AppShell : Shell
     {
@@ -6,5 +8,6 @@
         {
             InitializeComponent();
         }
+     
     }
 }
