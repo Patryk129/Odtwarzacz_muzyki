@@ -128,7 +128,7 @@ public partial class FilesPage : ContentPage
         private async void Home_Clicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync("//MainPage");
-        }
+    }
         private async void Search_Clicked(object sender, EventArgs e)
         {
             //await Shell.Current.GoToAsync("//SearchPage");

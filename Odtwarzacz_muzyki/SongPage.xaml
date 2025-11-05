@@ -2,12 +2,97 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Odtwarzacz_muzyki.SongPage"
+             BackgroundColor="#333333"
              Title="SongPage">
-    <Grid RowDefinitions="*,auto" ColumnDefinitions="*">
-        <Grid Grid.Row="0" RowDefinitions="*,*,*,*">
-            <Image Grid.Row="0" Source="dotnet_bot.png"/>
-            
-            
+
+    <Grid RowDefinitions="*,auto">
+        <!-- Główna sekcja odtwarzacza -->
+        <Grid RowDefinitions="auto,auto,auto,auto"
+              RowSpacing="20"
+              Padding="0,50,0,0"
+              VerticalOptions="Center">
+
+            <!-- Okładka -->
+            <Frame Grid.Row="0"
+                   WidthRequest="180"
+                   HeightRequest="180"
+                   BackgroundColor="#8B006B"
+                   BorderColor="#2196F3"
+                   CornerRadius="0"
+                   HorizontalOptions="Center">
+                <Image Source="{Binding ImagePath}"
+                       WidthRequest="100"
+                       HeightRequest="100"
+                       Aspect="AspectFill"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+            </Frame>
+
+            <!-- Tytuł -->
+            <Label Grid.Row="1"
+                   Text="{Binding Title}"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalOptions="Center"/>
+
+            <!-- Autor -->
+            <Label Grid.Row="2"
+                   Text="{Binding Author}"
+                   FontSize="14"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   Opacity="0.8"
+                   HorizontalOptions="Center"/>
+
+            <!-- Przyciski sterowania -->
+            <Grid Grid.Row="3"
+                  ColumnDefinitions="*,*,*"
+                  HorizontalOptions="Center"
+                  Margin="0,30,0,0"
+                  ColumnSpacing="40">
+                <ImageButton Grid.Column="0"
+                             Source="previous_icon.png"
+                             WidthRequest="25"
+                             HeightRequest="25"
+                             BackgroundColor="Transparent"
+                             Clicked="Previous_Clicked"/>
+                <ImageButton Grid.Column="1"
+                             Source="play_icon.png"
+                             WidthRequest="35"
+                             HeightRequest="35"
+                             BackgroundColor="Transparent"
+                             Clicked="Play_Clicked"/>
+                <ImageButton Grid.Column="2"
+                             Source="next_icon.png"
+                             WidthRequest="25"
+                             HeightRequest="25"
+                             BackgroundColor="Transparent"
+                             Clicked="Next_Clicked"/>
+            </Grid>
+        </Grid>
+
+        <!-- Dolne menu nawigacji -->
+        <Grid Grid.Row="1"
+              ColumnDefinitions="*,*,*,*"
+              Padding="0,20,0,10"
+              BackgroundColor="#2B2B2B">
+            <ImageButton Grid.Column="0"
+                         Source="home_icon_active.png"
+                         Clicked="Home_Clicked"
+                         BackgroundColor="Transparent"/>
+            <ImageButton Grid.Column="1"
+                         Source="search_icon.png"
+                         Clicked="Search_Clicked"
+                         BackgroundColor="Transparent"/>
+            <ImageButton Grid.Column="2"
+                         Source="files_icon.png"
+                         Clicked="Files_Clicked"
+                         BackgroundColor="Transparent"/>
+            <ImageButton Grid.Column="3"
+                         Source="account_icon.png"
+                         Clicked="Account_Clicked"
+                         BackgroundColor="Transparent"/>
         </Grid>
     </Grid>
 </ContentPage>

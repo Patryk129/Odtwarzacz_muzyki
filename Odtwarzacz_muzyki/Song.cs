@@ -10,5 +10,8 @@ namespace Odtwarzacz_muzyki
     {
         public string Title { get; set; }
         public string Path { get; set; }
+        public string ImagePath { get; set; }
+        public string Author { get; set; }
+
     }
 }
