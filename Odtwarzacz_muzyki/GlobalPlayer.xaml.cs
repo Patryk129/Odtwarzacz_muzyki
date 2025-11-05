@@ -75,20 +75,17 @@ namespace Odtwarzacz_muzyki
                 var path = _songs[_currentIndex].Path;
                 if (string.IsNullOrEmpty(path)) return;
 
-                // Jeœli player nie ma jeszcze Ÿród³a — ustaw tylko raz
                 if (Player.Source == null)
                     Player.Source = path;
 
                 if (!_isPlaying)
                 {
-                    // Wznów lub rozpocznij odtwarzanie
                     Player.Play();
                     PlayButton.Source = "pause_icon.png";
                     _isPlaying = true;
                 }
                 else
                 {
-                    // Pauza (nie stop!)
                     Player.Pause();
                     PlayButton.Source = "play_icon.png";
                     _isPlaying = false;

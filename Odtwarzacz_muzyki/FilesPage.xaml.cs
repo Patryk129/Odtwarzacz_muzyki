@@ -87,38 +87,58 @@ public partial class FilesPage : ContentPage
         }
     }
     private bool _isPlaying = false;
-    private void PlayButton_Clicked(object sender, EventArgs e)
-    {
-        try
+    //private void PlayButton_Clicked(object sender, EventArgs e)
+    //{
+    //    try
+    //    {
+    //        if (_songs.Count == 0) return;
+    //        if (_currentIndex == -1) _currentIndex = 0;
+
+    //        var path = _songs[_currentIndex].Path;
+    //        if (string.IsNullOrEmpty(path)) return;
+
+    //        // Jeśli player nie ma jeszcze źródła — ustaw tylko raz
+    //        if (Player.Source == null)
+    //            Player.Source = path;
+
+    //        if (!_isPlaying)
+    //        {
+    //            // Wznów lub rozpocznij odtwarzanie
+    //            Player.Play();
+    //            PlayButton.Source = "pause_icon.png";
+    //            _isPlaying = true;
+    //        }
+    //        else
+    //        {
+    //            // Pauza (nie stop!)
+    //            Player.Pause();
+    //            PlayButton.Source = "play_icon.png";
+    //            _isPlaying = false;
+    //        }
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        Console.WriteLine($"Błąd: {ex.Message}");
+    //    }
+    //}
+         private async void Files_Clicked(object sender, EventArgs e)
         {
-            if (_songs.Count == 0) return;
-            if (_currentIndex == -1) _currentIndex = 0;
-
-            var path = _songs[_currentIndex].Path;
-            if (string.IsNullOrEmpty(path)) return;
-
-            // Jeśli player nie ma jeszcze źródła — ustaw tylko raz
-            if (Player.Source == null)
-                Player.Source = path;
-
-            if (!_isPlaying)
-            {
-                // Wznów lub rozpocznij odtwarzanie
-                Player.Play();
-                PlayButton.Source = "pause_icon.png";
-                _isPlaying = true;
-            }
-            else
-            {
-                // Pauza (nie stop!)
-                Player.Pause();
-                PlayButton.Source = "play_icon.png";
-                _isPlaying = false;
-            }
+            await Navigation.PushAsync(new FilesPage(_songs));
         }
-        catch (Exception ex)
+        private async void Home_Clicked(object sender, EventArgs e)
         {
-            Console.WriteLine($"Błąd: {ex.Message}");
+            await Shell.Current.GoToAsync("//MainPage");
         }
-    }
+        private async void Search_Clicked(object sender, EventArgs e)
+        {
+            //await Shell.Current.GoToAsync("//SearchPage");
+            await Navigation.PushAsync(new SearchPage(_songs));
+
+        }
+
+        private async void Account_Clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("//AccountPage");
+        }
+
 }

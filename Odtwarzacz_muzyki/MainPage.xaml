@@ -6,7 +6,7 @@
              x:Class="Odtwarzacz_muzyki.MainPage"
              BackgroundColor="#2F2D2D">
     <Grid RowDefinitions="auto,*,auto" ColumnDefinitions="*">
-        <toolkit:MediaElement x:Name="Player" IsVisible="False"/>
+        <!--<toolkit:MediaElement x:Name="Player" IsVisible="False"/>-->
         <local:GlobalPlayer Grid.Row="0" x:Name="MiniPlayer"/>
         <!--<Grid Grid.Row="0"  RowDefinitions="*,*" ColumnDefinitions="*,*,auto" BackgroundColor="#333533" HeightRequest="80" VerticalOptions="Start" Margin="0,55,0,0">
             <ImageButton x:Name="SongCover" WidthRequest="80" HeightRequest="80" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="1"  Source="dotnet_bot.png"/>
