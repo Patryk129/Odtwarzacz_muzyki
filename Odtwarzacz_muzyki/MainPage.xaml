@@ -33,7 +33,6 @@
             <ImageButton WidthRequest="50" HeightRequest="50" Grid.Row="0" Grid.Column="2" Source="files_icon.png" Clicked="Files_Clicked"/>
             <ImageButton WidthRequest="50" HeightRequest="50" Grid.Row="0" Grid.Column="3" Source="account_icon.png" Clicked="Account_Clicked"/>
         </Grid>
-        
     </Grid>
     
     

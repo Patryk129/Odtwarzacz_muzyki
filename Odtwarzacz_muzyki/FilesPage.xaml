@@ -5,7 +5,7 @@
              xmlns:local="clr-namespace:Odtwarzacz_muzyki"
              x:Class="Odtwarzacz_muzyki.FilesPage"
              BackgroundColor="#2F2D2D">
-    <Grid RowDefinitions="auto,*,*,auto" ColumnDefinitions="*">
+    <Grid RowDefinitions="auto,*,auto" ColumnDefinitions="*">
         <Button Grid.Row="0" Clicked="Add_Clicked" Text="ADD FILES"/>
         <!--<toolkit:MediaElement x:Name="Player" IsVisible="False"/>
         <Grid Grid.Row="1"  RowDefinitions="*,*" ColumnDefinitions="*,*,auto" BackgroundColor="#333533" HeightRequest="80" VerticalOptions="Start" Margin="0,55,0,0">
