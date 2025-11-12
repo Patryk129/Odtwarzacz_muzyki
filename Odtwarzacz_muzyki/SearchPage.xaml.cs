@@ -18,7 +18,8 @@ public partial class SearchPage : ContentPage
     }
     private async void Home_Clicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("//MainPage");
+        //await Shell.Current.GoToAsync("//MainPage");
+        await Shell.Current.GoToAsync("//SongPage");
     }
     private async void Search_Clicked(object sender, EventArgs e)
     {

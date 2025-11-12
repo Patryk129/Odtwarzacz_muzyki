@@ -10,7 +10,7 @@ namespace Odtwarzacz_muzyki
         private ObservableCollection<Song> _songs = new();
         private readonly string _songsFilePath = Path.Combine(FileSystem.AppDataDirectory, "songs.json");
         private int _currentIndex = -1;
-        //private int _currentIndex = 0;
+        //private bool _isPlaying = false;
 
         public static GlobalPlayer Instance
         {
@@ -21,6 +21,9 @@ namespace Odtwarzacz_muzyki
                 return _instance;
             }
         }
+        public MediaElement PlayerControl => Player;
+        public Label SongTitleLabel => SongTitle;
+        public MediaElement Control => Player;
 
         public GlobalPlayer()
         {

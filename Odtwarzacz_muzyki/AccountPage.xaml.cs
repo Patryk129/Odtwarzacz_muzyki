@@ -17,6 +17,7 @@ public partial class AccountPage : ContentPage
     private async void Files_Clicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("//FilesPage");
+        //await Navigation.PushAsync(new SearchPage(_songs));
     }
     private async void Account_Clicked(object sender, EventArgs e)
     {

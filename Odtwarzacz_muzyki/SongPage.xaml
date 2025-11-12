@@ -6,13 +6,12 @@
              Title="SongPage">
 
     <Grid RowDefinitions="*,auto">
-        <!-- Główna sekcja odtwarzacza -->
         <Grid RowDefinitions="auto,auto,auto,auto"
               RowSpacing="20"
               Padding="0,50,0,0"
               VerticalOptions="Center">
 
-            <!-- Okładka -->
+
             <Frame Grid.Row="0"
                    WidthRequest="180"
                    HeightRequest="180"
@@ -28,7 +27,6 @@
                        VerticalOptions="Center"/>
             </Frame>
 
-            <!-- Tytuł -->
             <Label Grid.Row="1"
                    Text="{Binding Title}"
                    FontSize="20"
@@ -36,7 +34,6 @@
                    TextColor="White"
                    HorizontalOptions="Center"/>
 
-            <!-- Autor -->
             <Label Grid.Row="2"
                    Text="{Binding Author}"
                    FontSize="14"
@@ -45,7 +42,6 @@
                    Opacity="0.8"
                    HorizontalOptions="Center"/>
 
-            <!-- Przyciski sterowania -->
             <Grid Grid.Row="3"
                   ColumnDefinitions="*,*,*"
                   HorizontalOptions="Center"
@@ -72,7 +68,6 @@
             </Grid>
         </Grid>
 
-        <!-- Dolne menu nawigacji -->
         <Grid Grid.Row="1"
               ColumnDefinitions="*,*,*,*"
               Padding="0,20,0,10"
@@ -80,19 +75,23 @@
             <ImageButton Grid.Column="0"
                          Source="home_icon_active.png"
                          Clicked="Home_Clicked"
-                         BackgroundColor="Transparent"/>
+                         BackgroundColor="Transparent"
+                         WidthRequest="50" HeightRequest="50"/>
             <ImageButton Grid.Column="1"
                          Source="search_icon.png"
-                         Clicked="Search_Clicked"
-                         BackgroundColor="Transparent"/>
+                         Clicked="Search_Clicked" 
+                         BackgroundColor="Transparent"
+                         WidthRequest="50" HeightRequest="50"/>
             <ImageButton Grid.Column="2"
                          Source="files_icon.png"
                          Clicked="Files_Clicked"
-                         BackgroundColor="Transparent"/>
+                         BackgroundColor="Transparent"
+                         WidthRequest="50" HeightRequest="50"/>
             <ImageButton Grid.Column="3"
                          Source="account_icon.png"
                          Clicked="Account_Clicked"
-                         BackgroundColor="Transparent"/>
+                         BackgroundColor="Transparent"
+                         WidthRequest="50" HeightRequest="50"/>
         </Grid>
     </Grid>
 </ContentPage>
