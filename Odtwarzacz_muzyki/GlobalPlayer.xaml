@@ -7,11 +7,11 @@
     <Grid RowDefinitions="auto,*" BackgroundColor="#2F2D2D">
         <Grid Grid.Row="0"  RowDefinitions="*,*" ColumnDefinitions="*,*,auto" BackgroundColor="#333533" HeightRequest="80" VerticalOptions="Start" Margin="0,55,0,0">
             <ImageButton x:Name="SongCover" WidthRequest="80" HeightRequest="80" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="1"  Source="dotnet_bot.png"/>
-            <Label x:Name="SongTitle" Grid.Column="1" Grid.Row="0" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" />
+            <Label x:Name="SongTitle" Grid.Column="1" Grid.Row="0" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" x:FieldModifier="Public"/>
             <Label x:Name="Artist" Text="Artist" Grid.Column="1" Grid.Row="1" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
             <ImageButton x:Name="PlayButton" WidthRequest="50" HeightRequest="50" Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="1"  Source="play_icon.png" Clicked="PlayPauseButton_Clicked"/>
         </Grid>
 
-        <toolkit:MediaElement x:Name="Player" IsVisible="False" Grid.Row="1"/>
+        <toolkit:MediaElement x:Name="Player" IsVisible="False" Grid.Row="1" x:FieldModifier="Public"/>
     </Grid>
 </ContentView>

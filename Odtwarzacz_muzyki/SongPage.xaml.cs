@@ -73,7 +73,7 @@ namespace Odtwarzacz_muzyki
                 var player = GlobalPlayer.Instance.Player;
 
                 player.Source = song.Path;
-                await player.PlayAsync();
+                player.Play();
 
                 _isPlaying = true;
             }
