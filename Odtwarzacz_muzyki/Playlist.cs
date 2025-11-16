@@ -11,7 +11,7 @@ namespace Odtwarzacz_muzyki
     {
         public string Name { get; set; }
         public ObservableCollection<Song> Songs { get; set; } = new();
-        public string ImagePath { get; set; }
+        public string ImagePath { get; set; } = "deafult_playlist.png";
     }
 
 }

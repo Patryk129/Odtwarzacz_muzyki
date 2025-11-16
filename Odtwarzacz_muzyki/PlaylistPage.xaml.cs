@@ -12,28 +12,33 @@ public partial class PlaylistPage : ContentPage
     {
         InitializeComponent();
         _allSongs = allSongs;
-
-        // Ustawienie ItemsSource dla CollectionView
         PlaylistList.ItemsSource = PlaylistManager.Playlists;
 
-        // Za³aduj playlisty z pliku
         _ = PlaylistManager.LoadAsync();
     }
 
-    // Tworzenie playlisty z mo¿liwoœci¹ wyboru obrazka
     private async void AddPlaylist_Clicked(object sender, EventArgs e)
     {
         string name = await DisplayPromptAsync("Nowa playlista", "Podaj nazwê:");
         if (string.IsNullOrWhiteSpace(name)) return;
 
-        // Wybór obrazka
         FileResult imageFile = await FilePicker.PickAsync(new PickOptions
         {
             PickerTitle = "Wybierz obraz playlisty",
             FileTypes = FilePickerFileType.Images
         });
 
-        string imagePath = imageFile?.FullPath ?? "dotnet_bot.png";
+        string imagePath;
+
+        if (imageFile != null && !string.IsNullOrEmpty(imageFile.FullPath))
+        {
+            imagePath = imageFile.FullPath;
+        }
+        else
+        {
+            imagePath = "default_playlist.png";
+        }
+
 
         var newPlaylist = new Playlist
         {
@@ -45,10 +50,13 @@ public partial class PlaylistPage : ContentPage
         await PlaylistManager.SaveAsync();
     }
 
-    // Otwieranie playlisty
     private void OpenPlaylist_Clicked(object sender, EventArgs e)
     {
-        _selectedPlaylist = (sender as Button)?.BindingContext as Playlist;
+        _selectedPlaylist = null;
+        if (sender is Button clickedButton && clickedButton.BindingContext is Playlist playlist)
+        {
+            _selectedPlaylist = playlist;
+        }
         if (_selectedPlaylist == null) return;
 
         PlaylistTitle.Text = _selectedPlaylist.Name;
@@ -58,7 +66,6 @@ public partial class PlaylistPage : ContentPage
         PlaylistDetails.IsVisible = true;
     }
 
-    // Cofanie
     private void Back_Clicked(object sender, EventArgs e)
     {
         PlaylistDetails.IsVisible = false;
@@ -66,7 +73,6 @@ public partial class PlaylistPage : ContentPage
         _selectedPlaylist = null;
     }
 
-    // Dodawanie piosenki z ju¿ wgranych utworów
     private async void AddSong_Clicked(object sender, EventArgs e)
     {
         if (_selectedPlaylist == null || _allSongs.Count == 0) return;
@@ -95,7 +101,6 @@ public partial class PlaylistPage : ContentPage
         SongsList.ItemsSource = _selectedPlaylist.Songs;
     }
 
-    // Odtwarzanie utworu z playlisty
     private async void PlaySong_Clicked(object sender, EventArgs e)
     {
         var song = (sender as Button)?.BindingContext as Song;
@@ -109,7 +114,6 @@ public partial class PlaylistPage : ContentPage
         await Navigation.PushAsync(songPage);
     }
 
-    // Usuwanie utworu z playlisty
     private async void DeleteSong_Clicked(object sender, EventArgs e)
     {
         var song = (sender as Button)?.BindingContext as Song;
@@ -123,5 +127,22 @@ public partial class PlaylistPage : ContentPage
 
         SongsList.ItemsSource = null;
         SongsList.ItemsSource = _selectedPlaylist.Songs;
+    }
+
+    private async void Home_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new MainPage(_allSongs));
+    }
+    private async void Files_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new FilesPage(_allSongs));
+    }
+    private async void Playlist_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new PlaylistPage(_allSongs));
+    }
+    private async void Search_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new SearchPage(_allSongs));
     }
 }

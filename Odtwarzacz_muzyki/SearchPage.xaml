@@ -8,58 +8,27 @@
 
     <Grid RowDefinitions="auto,*,auto" ColumnDefinitions="*">
         
-        <!-- SEARCH BAR -->
-        <Frame CornerRadius="10"
-               Padding="5"
-               BackgroundColor="#5D5C5C"
-               Grid.Row="0">
-            <SearchBar x:Name="Search"
-                       TextChanged="Search_TextChanged"
-                       Placeholder="Szukaj po tytule lub autorze..."
-                       TextColor="White"
-                       PlaceholderColor="#CCCCCC"/>
+        <Frame CornerRadius="10" Padding="5" BackgroundColor="#5D5C5C" Grid.Row="0">
+            <SearchBar x:Name="Search" TextChanged="Search_TextChanged" Placeholder="Szukaj po tytule lub autorze..." TextColor="White" PlaceholderColor="#CCCCCC"/>
         </Frame>
-
-        <!-- WYNIKI WYSZUKIWANIA -->
-        <CollectionView x:Name="SearchResults"
-                        Grid.Row="1"
-                        Margin="0,10,0,10">
+        
+        <CollectionView x:Name="SearchResults" Grid.Row="1" Margin="0,10,0,10">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid RowDefinitions="*,*" ColumnDefinitions="80,*,auto"
-                          BackgroundColor="#333533"
-                          HeightRequest="80"
-                          Margin="0,5,0,0">
-
-                        <Image Grid.Row="0"
-                               Grid.RowSpan="2"
-                               Grid.Column="0"
-                               WidthRequest="80"
-                               HeightRequest="80"
-                               Source="{Binding ImagePath}" />
-
-                        <Label Grid.Row="0"
-                               Grid.Column="1"
-                               Text="{Binding Title}"
-                               TextColor="White"
-                               VerticalOptions="Center" />
-
-                        <Label Grid.Row="1"
-                               Grid.Column="1"
-                               Text="{Binding Author}"
-                               TextColor="White"
-                               VerticalOptions="Center" />
+                    <Grid RowDefinitions="*,*" ColumnDefinitions="80,*,auto" BackgroundColor="#333533" HeightRequest="80" Margin="0,5,0,0">
+                        <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" WidthRequest="80" HeightRequest="80" Source="{Binding ImagePath}" />
+                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding Title}"  TextColor="White" VerticalOptions="Center" />
+                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Author}" TextColor="White" VerticalOptions="Center" /> 
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <!-- NAVIGATION -->
         <Grid Grid.Row="2" RowDefinitions="*" ColumnDefinitions="*,*,*,*">
-            <ImageButton Grid.Column="0" WidthRequest="50" HeightRequest="50" Source="home_icon.png" Clicked="Home_Clicked"/>
-            <ImageButton Grid.Column="1" WidthRequest="50" HeightRequest="50" Source="search_icon_active.png" Clicked="Search_Clicked"/>
-            <ImageButton Grid.Column="2" WidthRequest="50" HeightRequest="50" Source="files_icon.png" Clicked="Files_Clicked"/>
-            <ImageButton Grid.Column="3" WidthRequest="50" HeightRequest="50" Source="account_icon.png" Clicked="Account_Clicked"/>
+            <ImageButton WidthRequest="50" HeightRequest="50" Grid.Column="0" Source="home_icon.png" Clicked="Home_Clicked"/>
+            <ImageButton WidthRequest="50" HeightRequest="50" Grid.Column="1" Source="files_icon.png" Clicked="Files_Clicked"/>
+            <ImageButton WidthRequest="50" HeightRequest="50" Grid.Column="2" Source="playlist_icon.png" Clicked="Playlist_Clicked"/>
+            <ImageButton WidthRequest="50" HeightRequest="50" Grid.Column="3" Source="search_icon_active.png" Clicked="Search_Clicked"/>
         </Grid>
 
     </Grid>

@@ -5,19 +5,14 @@
              BackgroundColor="#2F2D2D">
 
     <Grid RowDefinitions="auto,*,auto">
-
-        <!-- Górny pasek + dodawanie playlisty -->
-        <Grid Grid.Row="0" Padding="15" ColumnDefinitions="*,auto">
-            <Label Text="Playlisty" TextColor="White" FontSize="28"/>
-            <Button Text="➕" Clicked="AddPlaylist_Clicked"
-                    BackgroundColor="#444" TextColor="White"
-                    WidthRequest="40" HeightRequest="40"/>
+        <Grid Grid.Row="0" Padding="15" ColumnDefinitions="*,*">
+            <Label Text="Playlisty" TextColor="White" FontSize="28" Grid.Column="0"/>
+            <Button Text="Dodaj playliste" Clicked="AddPlaylist_Clicked"
+                    BackgroundColor="#940B67" TextColor="White"
+                    HeightRequest="40" Grid.Column="1"/>
         </Grid>
 
-        <!-- Główna zawartość -->
         <Grid Grid.Row="1" x:Name="MainGrid">
-
-            <!-- Lista playlist -->
             <CollectionView x:Name="PlaylistList">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -27,27 +22,25 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <!-- Obraz playlisty -->
                             <Image Grid.Column="0" Source="{Binding ImagePath}" WidthRequest="60" HeightRequest="60"/>
                             <Label Grid.Column="1" Text="{Binding Name}" TextColor="White" VerticalOptions="Center" FontSize="18"/>
-                            <Button Grid.Column="1" Text="Otwórz" HorizontalOptions="End" VerticalOptions="Center" Clicked="OpenPlaylist_Clicked"/>
+                            <Button Grid.Column="1" Text="Otwórz" HorizontalOptions="End" VerticalOptions="Center" Clicked="OpenPlaylist_Clicked" BackgroundColor="#940B67"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <!-- Wybrana playlista: ukrywana / pokazywana -->
             <VerticalStackLayout x:Name="PlaylistDetails" IsVisible="False" Padding="10">
                 <Grid ColumnDefinitions="*,auto" Padding="10">
                     <Label x:Name="PlaylistTitle" TextColor="White" FontSize="26"/>
                     <Button Text="⟵" Clicked="Back_Clicked"
-                            BackgroundColor="#444" TextColor="White"
+                            BackgroundColor="#940B67" TextColor="White"
                             WidthRequest="40" HeightRequest="40"
                             Grid.Column="1"/>
                 </Grid>
 
-                <Button Text="➕ Dodaj piosenkę" Clicked="AddSong_Clicked"
-                        BackgroundColor="#333" TextColor="White" Margin="0,10"/>
+                <Button Text="Dodaj piosenkę" Clicked="AddSong_Clicked"
+                        BackgroundColor="#940B67" TextColor="White" Margin="0,10"/>
 
                 <CollectionView x:Name="SongsList">
                     <CollectionView.ItemTemplate>
@@ -62,7 +55,7 @@
                                             TextColor="White"
                                             Clicked="PlaySong_Clicked"/>
 
-                                    <Button Text="🗑"
+                                    <Button Text="-"
                                             Grid.Column="2"
                                             BackgroundColor="#700"
                                             TextColor="White"
@@ -75,6 +68,11 @@
             </VerticalStackLayout>
 
         </Grid>
-
+        <Grid Grid.Row="2" RowDefinitions="*" ColumnDefinitions="*,*,*,*">
+            <ImageButton WidthRequest="50" HeightRequest="50" Grid.Column="0" Source="home_icon.png" Clicked="Home_Clicked"/>
+            <ImageButton WidthRequest="50" HeightRequest="50" Grid.Column="1" Source="files_icon.png" Clicked="Files_Clicked"/>
+            <ImageButton WidthRequest="50" HeightRequest="50" Grid.Column="2" Source="playlist_icon_active.png" Clicked="Playlist_Clicked"/>
+            <ImageButton WidthRequest="50" HeightRequest="50" Grid.Column="3" Source="search_icon.png" Clicked="Search_Clicked"/>
+        </Grid>
     </Grid>
 </ContentPage>

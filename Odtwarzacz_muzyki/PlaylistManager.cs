@@ -7,11 +7,7 @@ namespace Odtwarzacz_muzyki
     public static class PlaylistManager
     {
         private static readonly string _filePath = Path.Combine(FileSystem.AppDataDirectory, "playlists.json");
-
-        // Globalna lista playlist
         public static ObservableCollection<Playlist> Playlists { get; } = new();
-
-        // Zapis do pliku
         public static async Task SaveAsync()
         {
             try
@@ -19,13 +15,8 @@ namespace Odtwarzacz_muzyki
                 var json = JsonSerializer.Serialize(Playlists);
                 await File.WriteAllTextAsync(_filePath, json);
             }
-            catch
-            {
-                // obsługa błędów
-            }
+            catch { }
         }
-
-        // Odczyt z pliku
         public static async Task LoadAsync()
         {
             try
@@ -43,10 +34,7 @@ namespace Odtwarzacz_muzyki
                     }
                 }
             }
-            catch
-            {
-                // obsługa błędów
-            }
+            catch { }
         }
     }
 }

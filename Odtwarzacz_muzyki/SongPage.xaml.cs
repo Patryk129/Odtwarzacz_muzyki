@@ -16,8 +16,11 @@ namespace Odtwarzacz_muzyki
             InitializeComponent();
             _songs = playlistSongs;
             _currentIndex = 0;
+
+            Player.MediaEnded += Player_MediaEnded; 
             UpdateSongInfo();
         }
+
         public SongPage() : this(new ObservableCollection<Song>())
         {
             _ = LoadSongsAsync();
@@ -54,112 +57,115 @@ namespace Odtwarzacz_muzyki
 
         private void UpdateSongInfo()
         {
-            if (_currentIndex < 0 || _currentIndex >= _songs.Count)
-                return;
+            if (_currentIndex < 0 || _currentIndex >= _songs.Count) return;
 
             var song = _songs[_currentIndex];
-
             BindingContext = song;
-
             if (GlobalPlayer.Instance != null)
             {
                 GlobalPlayer.Instance.SongTitleLabel.Text = song.Title;
                 GlobalPlayer.Instance.PlayerControl.Source = song.Path;
             }
+
+            if (!string.IsNullOrEmpty(song.Path) && File.Exists(song.Path))
+            {
+                Player.Source = song.Path;
+            }
         }
+
         private void Play()
         {
-            try
+            if (_songs.Count == 0 || _currentIndex < 0) return;
+
+            if (!_isPlaying)
             {
-                if (_songs.Count == 0) return;
-                if (_currentIndex == -1) _currentIndex = 0;
-
-                var path = _songs[_currentIndex].Path;
-                if (string.IsNullOrEmpty(path)) return;
-
-                // Jeœli player nie ma jeszcze Ÿród³a — ustaw tylko raz
-                if (Player.Source == null)
-                    Player.Source = path;
-
-                if (!_isPlaying)
-                {
-                    // Wznów lub rozpocznij odtwarzanie
-                    Player.Play();
-                    PlayButton.Source = "pause_icon.png";
-                    _isPlaying = true;
-                }
-                else
-                {
-                    // Pauza (nie stop!)
-                    Player.Pause();
-                    PlayButton.Source = "play_icon.png";
-                    _isPlaying = false;
-                }
+                Player.Play();
+                PlayButton.Source = "pause_icon.png";
+                _isPlaying = true;
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine($"B³¹d: {ex.Message}");
+                Player.Pause();
+                PlayButton.Source = "play_icon.png";
+                _isPlaying = false;
             }
         }
-        private void PlayButton_Clicked(object sender, EventArgs e)
+
+        private void PlayCurrentSongWithoutChangingState()
         {
-            Play();
-        
-        
+            if (_songs.Count == 0 || _currentIndex < 0) return;
+
+            var song = _songs[_currentIndex];
+            if (string.IsNullOrEmpty(song.Path) || !File.Exists(song.Path)) return;
+
+            Player.Source = song.Path;
+            BindingContext = song;
+
+            if (_isPlaying)
+                Player.Play();
         }
 
+        private void Player_MediaEnded(object sender, EventArgs e)
+        {
+            _currentIndex++;
+            if (_currentIndex >= _songs.Count) _currentIndex = 0;
 
+            UpdateSongInfo();
+            PlayCurrentSongWithoutChangingState();
+        }
 
-        private async void Previous_Clicked(object sender, EventArgs e)
+        private void Previous_Clicked(object sender, EventArgs e)
         {
             if (_songs.Count == 0) return;
 
             _currentIndex--;
-            if (_currentIndex < 0)
-                _currentIndex = _songs.Count - 1;
+            if (_currentIndex < 0) _currentIndex = _songs.Count - 1;
 
             UpdateSongInfo();
-            //await Play();
+            PlayCurrentSongWithoutChangingState();
         }
 
-        private async void Next_Clicked(object sender, EventArgs e)
+        private void PlayButton_Clicked(object sender, EventArgs e)
+        {
+            Play();
+        }
+
+        private void Next_Clicked(object sender, EventArgs e)
         {
             if (_songs.Count == 0) return;
 
             _currentIndex++;
-            if (_currentIndex >= _songs.Count)
-                _currentIndex = 0;
+            if (_currentIndex >= _songs.Count) _currentIndex = 0;
 
             UpdateSongInfo();
-            //await PlayButton_Clicked();
+            PlayCurrentSongWithoutChangingState();
         }
-
-        private async void Files_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new FilesPage(_songs));
-        }
-
-        private async void Home_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new SongPage());
-        }
-
-        private async void Search_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new SearchPage(_songs));
-        }
-
-        private async void Account_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new PlaylistPage(_songs));
-        }
-
         public void SetCurrentSong(Song song)
         {
             _currentIndex = _songs.IndexOf(song);
             if (_currentIndex < 0) _currentIndex = 0;
             UpdateSongInfo();
+            PlayCurrentSongWithoutChangingState();
         }
 
+
+        private async void Home_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new MainPage(_songs));
+        }
+        private async void Files_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new FilesPage(_songs));
+        }
+        private async void Playlist_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new PlaylistPage(_songs));
+        }
+        private async void Search_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SearchPage(_songs));
+        }
+
+        
     }
 }

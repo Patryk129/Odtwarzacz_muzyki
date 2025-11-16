@@ -4,9 +4,7 @@
              x:Class="Odtwarzacz_muzyki.MainPage"
              BackgroundColor="#2F2D2D">
     <Grid RowDefinitions="auto,*,auto" ColumnDefinitions="*">
-        <!--<local:GlobalPlayer Grid.Row="0" x:Name="MiniPlayer"/>-->
-
-        <!-- Lista playlist -->
+        <Label Grid.Row="0" TextColor="White" FontSize="25" Margin="10,15">Twoje playlisty:</Label>
         <CollectionView x:Name="PlaylistsCollectionView" Grid.Row="1" Margin="10">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
@@ -24,12 +22,12 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <!-- Pasek nawigacji -->
         <Grid Grid.Row="2" RowDefinitions="*" ColumnDefinitions="*,*,*,*">
-            <ImageButton Grid.Column="0" Source="home_icon_active.png" Clicked="Home_Clicked"/>
-            <ImageButton Grid.Column="1" Source="search_icon.png" Clicked="Search_Clicked"/>
-            <ImageButton Grid.Column="2" Source="files_icon.png" Clicked="Files_Clicked"/>
-            <ImageButton Grid.Column="3" Source="account_icon.png" Clicked="Account_Clicked"/>
+            <ImageButton WidthRequest="50" HeightRequest="50" Grid.Column="0" Source="home_icon_active.png" Clicked="Home_Clicked"/>
+            <ImageButton WidthRequest="50" HeightRequest="50" Grid.Column="1" Source="files_icon.png" Clicked="Files_Clicked"/>
+            <ImageButton WidthRequest="50" HeightRequest="50" Grid.Column="2" Source="playlist_icon.png" Clicked="Playlist_Clicked"/>
+            <ImageButton WidthRequest="50" HeightRequest="50" Grid.Column="3" Source="search_icon.png" Clicked="Search_Clicked"/>
         </Grid>
     </Grid>
+
 </ContentPage>

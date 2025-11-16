@@ -8,9 +8,7 @@
     Title="Odtwarzacz_muzyki"
     FlyoutBehavior="Disabled">
 
-    <ShellContent
-        ContentTemplate="{DataTemplate local:SongPage}"
-        Route="SongPage"/>
+    
     <ShellContent
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
@@ -21,5 +19,9 @@
         <ShellContent
         ContentTemplate="{DataTemplate local:PlaylistPage}"
         Route="PlaylistPage" />
+    <ShellContent
+ContentTemplate="{DataTemplate local:SongPage}"
+Route="SongPage"/>
+
 
 </Shell>
