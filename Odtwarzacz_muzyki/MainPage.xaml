@@ -1,40 +1,35 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:local="clr-namespace:Odtwarzacz_muzyki"
              x:Class="Odtwarzacz_muzyki.MainPage"
              BackgroundColor="#2F2D2D">
     <Grid RowDefinitions="auto,*,auto" ColumnDefinitions="*">
-        <!--<toolkit:MediaElement x:Name="Player" IsVisible="False"/>-->
-        <local:GlobalPlayer Grid.Row="0" x:Name="MiniPlayer"/>
-        <!--<Grid Grid.Row="0"  RowDefinitions="*,*" ColumnDefinitions="*,*,auto" BackgroundColor="#333533" HeightRequest="80" VerticalOptions="Start" Margin="0,55,0,0">
-            <ImageButton x:Name="SongCover" WidthRequest="80" HeightRequest="80" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="1"  Source="dotnet_bot.png"/>
-            <Label x:Name="SongTitle" Grid.Column="1" Grid.Row="0" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" />
-            <Label x:Name="Artist" Text="Artist" Grid.Column="1" Grid.Row="1" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
-            <ImageButton x:Name="PlayButton" WidthRequest="50" HeightRequest="50" Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="1"  Source="play_icon.png" Clicked="PlayButton_Clicked"/>
-        </Grid>-->
+        <!--<local:GlobalPlayer Grid.Row="0" x:Name="MiniPlayer"/>-->
 
+        <!-- Lista playlist -->
+        <CollectionView x:Name="PlaylistsCollectionView" Grid.Row="1" Margin="10">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10" BackgroundColor="#333533" HeightRequest="80">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="1" RowDefinitions="auto,auto,auto" ColumnDefinitions="*" Margin="0,30,0,0">
-            <Label Grid.Row="0" Grid.Column="0" Text="Ostatnio słuchane" TextColor="White"/>
-            <Grid Grid.Row="1" RowDefinitions="*" ColumnDefinitions="*,*" BackgroundColor="#333533" HeightRequest="80" Margin="0,10,0,0">
-                <ImageButton WidthRequest="80" HeightRequest="80" Grid.Row="0" Grid.Column="0" Source="dotnet_bot.png"/>
-                <Label Text="Playlist_name" Grid.Column="1" Grid.Row="0" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
-            </Grid>
-            <Grid Grid.Row="2" RowDefinitions="*" ColumnDefinitions="*,*" BackgroundColor="#333533" HeightRequest="80" Margin="0,10,0,0">
-                <ImageButton WidthRequest="80" HeightRequest="80" Grid.Row="0" Grid.Column="0" Source="dotnet_bot.png"/>
-            <Label Text="Playlist_name" Grid.Column="1" Grid.Row="0" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
-        </Grid>
-    </Grid>
+                        <Image Grid.Column="0" Source="{Binding ImagePath}" WidthRequest="60" HeightRequest="60"/>
+                        <Label Grid.Column="1" Text="{Binding Name}" TextColor="White" VerticalOptions="Center" FontSize="18"/>
+                        <Button Grid.Column="1" Text="Otwórz" HorizontalOptions="End" VerticalOptions="Center" Clicked="OpenPlaylist_Clicked"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Pasek nawigacji -->
         <Grid Grid.Row="2" RowDefinitions="*" ColumnDefinitions="*,*,*,*">
-            <ImageButton WidthRequest="50" HeightRequest="50" Grid.Row="0" Grid.Column="0" Source="home_icon_active.png" Clicked="Home_Clicked"/>
-            <ImageButton WidthRequest="50" HeightRequest="50" Grid.Row="0" Grid.Column="1" Source="search_icon.png" Clicked="Search_Clicked"/>
-            <ImageButton WidthRequest="50" HeightRequest="50" Grid.Row="0" Grid.Column="2" Source="files_icon.png" Clicked="Files_Clicked"/>
-            <ImageButton WidthRequest="50" HeightRequest="50" Grid.Row="0" Grid.Column="3" Source="account_icon.png" Clicked="Account_Clicked"/>
+            <ImageButton Grid.Column="0" Source="home_icon_active.png" Clicked="Home_Clicked"/>
+            <ImageButton Grid.Column="1" Source="search_icon.png" Clicked="Search_Clicked"/>
+            <ImageButton Grid.Column="2" Source="files_icon.png" Clicked="Files_Clicked"/>
+            <ImageButton Grid.Column="3" Source="account_icon.png" Clicked="Account_Clicked"/>
         </Grid>
     </Grid>
-    
-    
-
 </ContentPage>

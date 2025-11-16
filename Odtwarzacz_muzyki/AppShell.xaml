@@ -19,7 +19,7 @@
         Route="SearchPage" />
 
         <ShellContent
-        ContentTemplate="{DataTemplate local:AccountPage}"
-        Route="AccountPage" />
+        ContentTemplate="{DataTemplate local:PlaylistPage}"
+        Route="PlaylistPage" />
 
 </Shell>

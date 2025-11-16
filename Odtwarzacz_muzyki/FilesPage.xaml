@@ -7,6 +7,8 @@
              BackgroundColor="#2F2D2D">
     <Grid RowDefinitions="auto,*,auto" ColumnDefinitions="*">
         <Button Grid.Row="0" Clicked="Add_Clicked" Text="ADD FILES"/>
+
+
         <!--<toolkit:MediaElement x:Name="Player" IsVisible="False"/>
         <Grid Grid.Row="1"  RowDefinitions="*,*" ColumnDefinitions="*,*,auto" BackgroundColor="#333533" HeightRequest="80" VerticalOptions="Start" Margin="0,55,0,0">
             <ImageButton x:Name="SongCover" WidthRequest="80" HeightRequest="80" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="1"  Source="dotnet_bot.png"/>
@@ -14,19 +16,19 @@
             <Label x:Name="Artist" Text="Artist" Grid.Column="1" Grid.Row="1" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
             <ImageButton x:Name="PlayButton" WidthRequest="50" HeightRequest="50" Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="1"  Source="play_icon.png" Clicked="PlayButton_Clicked"/>
         </Grid>-->
-        <local:GlobalPlayer Grid.Row="1" x:Name="MiniPlayer"/>
-        <CollectionView Grid.Row="2" x:Name="SongsCollectionView">
+        <!--<local:GlobalPlayer Grid.Row="1" x:Name="MiniPlayer"/>-->
+        
+        <CollectionView Grid.Row="1" x:Name="SongsCollectionView">
             <!--<Grid.ColumnSpan="3" Margin="5"-->
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <!--<HorizontalStackLayout>
             <Label Text="{Binding Title}"/>
         </HorizontalStackLayout>-->
-                    <Grid  RowDefinitions="*,*" ColumnDefinitions="*,*,auto" BackgroundColor="#333533" HeightRequest="80" VerticalOptions="Start" Margin="0,55,0,0">
-                        <ImageButton WidthRequest="80" HeightRequest="80" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="1"  Source="dotnet_bot.png"/>
-                        <Label Text="{Binding Title}" Grid.Column="1" Grid.Row="0" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" />
-                        <Label Text="Artist" Grid.Column="1" Grid.Row="1" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
-                        <!--<ImageButton WidthRequest="50" HeightRequest="50" Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="1"  Source="play_icon.png" Clicked="PlayButton_Clicked"/>-->
+                    <Grid RowDefinitions="*,*" ColumnDefinitions="80,*,auto" BackgroundColor="#333533" HeightRequest="80" VerticalOptions="Start" Margin="0,55,0,0">
+                        <Image WidthRequest="80" HeightRequest="80" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Source="{Binding ImagePath}" />
+                        <Label Text="{Binding Title}" Grid.Column="1" Grid.Row="0" TextColor="White" HorizontalOptions="Start" VerticalOptions="Center" />
+                        <Label Text="{Binding Author}" Grid.Column="1" Grid.Row="1" TextColor="White" HorizontalOptions="Start" VerticalOptions="Center" />
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

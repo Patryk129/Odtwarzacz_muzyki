@@ -11,9 +11,15 @@ namespace Odtwarzacz_muzyki
         private int _currentIndex = -1;
         private bool _isPlaying = false;
 
-        public SongPage()
+        public SongPage(ObservableCollection<Song> playlistSongs)
         {
             InitializeComponent();
+            _songs = playlistSongs;
+            _currentIndex = 0;
+            UpdateSongInfo();
+        }
+        public SongPage() : this(new ObservableCollection<Song>())
+        {
             _ = LoadSongsAsync();
         }
 
@@ -61,27 +67,48 @@ namespace Odtwarzacz_muzyki
                 GlobalPlayer.Instance.PlayerControl.Source = song.Path;
             }
         }
-
-        private async Task PlayCurrentSongAsync()
+        private void Play()
         {
             try
             {
-                if (_songs.Count == 0 || _currentIndex == -1)
-                    return;
+                if (_songs.Count == 0) return;
+                if (_currentIndex == -1) _currentIndex = 0;
 
-                var song = _songs[_currentIndex];
-                var player = GlobalPlayer.Instance.Player;
+                var path = _songs[_currentIndex].Path;
+                if (string.IsNullOrEmpty(path)) return;
 
-                player.Source = song.Path;
-                player.Play();
+                // Jeœli player nie ma jeszcze Ÿród³a — ustaw tylko raz
+                if (Player.Source == null)
+                    Player.Source = path;
 
-                _isPlaying = true;
+                if (!_isPlaying)
+                {
+                    // Wznów lub rozpocznij odtwarzanie
+                    Player.Play();
+                    PlayButton.Source = "pause_icon.png";
+                    _isPlaying = true;
+                }
+                else
+                {
+                    // Pauza (nie stop!)
+                    Player.Pause();
+                    PlayButton.Source = "play_icon.png";
+                    _isPlaying = false;
+                }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"B³¹d odtwarzania: {ex.Message}");
+                Console.WriteLine($"B³¹d: {ex.Message}");
             }
         }
+        private void PlayButton_Clicked(object sender, EventArgs e)
+        {
+            Play();
+        
+        
+        }
+
+
 
         private async void Previous_Clicked(object sender, EventArgs e)
         {
@@ -92,26 +119,7 @@ namespace Odtwarzacz_muzyki
                 _currentIndex = _songs.Count - 1;
 
             UpdateSongInfo();
-            await PlayCurrentSongAsync();
-        }
-
-        private async void Play_Clicked(object sender, EventArgs e)
-        {
-            if (_songs.Count == 0 || _currentIndex == -1)
-                return;
-
-            var player = GlobalPlayer.Instance.Player;
-
-            if (!_isPlaying)
-            {
-                await PlayCurrentSongAsync();
-                _isPlaying = true;
-            }
-            else
-            {
-                player.Pause();
-                _isPlaying = false;
-            }
+            //await Play();
         }
 
         private async void Next_Clicked(object sender, EventArgs e)
@@ -123,7 +131,7 @@ namespace Odtwarzacz_muzyki
                 _currentIndex = 0;
 
             UpdateSongInfo();
-            await PlayCurrentSongAsync();
+            //await PlayButton_Clicked();
         }
 
         private async void Files_Clicked(object sender, EventArgs e)
@@ -143,7 +151,15 @@ namespace Odtwarzacz_muzyki
 
         private async void Account_Clicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//AccountPage");
+            await Navigation.PushAsync(new PlaylistPage(_songs));
         }
+
+        public void SetCurrentSong(Song song)
+        {
+            _currentIndex = _songs.IndexOf(song);
+            if (_currentIndex < 0) _currentIndex = 0;
+            UpdateSongInfo();
+        }
+
     }
 }

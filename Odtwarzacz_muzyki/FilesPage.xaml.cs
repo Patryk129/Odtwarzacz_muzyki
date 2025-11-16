@@ -36,12 +36,24 @@ public partial class FilesPage : ContentPage
             {
                 foreach (var file in result)
                 {
+                    string author = await DisplayPromptAsync("Autor", $"Podaj autora utworu '{file.FileName}':");
+                    var image = await FilePicker.PickAsync(new PickOptions
+                    {
+                        PickerTitle = "Wybierz okładkę",
+                        FileTypes = FilePickerFileType.Images
+                    });
+
+                    string imagePath = image?.FullPath;
+
                     _songs.Add(new Song
                     {
                         Title = System.IO.Path.GetFileNameWithoutExtension(file.FileName),
-                        Path = file.FullPath
+                        Path = file.FullPath,
+                        Author = author,
+                        ImagePath = imagePath
                     });
                 }
+
             }
             await SaveSongsAsync();
         }
@@ -121,7 +133,7 @@ public partial class FilesPage : ContentPage
     //        Console.WriteLine($"Błąd: {ex.Message}");
     //    }
     //}
-         private async void Files_Clicked(object sender, EventArgs e)
+    private async void Files_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new FilesPage(_songs));
         }
@@ -138,7 +150,7 @@ public partial class FilesPage : ContentPage
 
         private async void Account_Clicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//AccountPage");
+            await Navigation.PushAsync(new PlaylistPage(_songs));
         }
 
 }

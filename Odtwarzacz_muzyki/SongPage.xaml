@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Odtwarzacz_muzyki.SongPage"
              BackgroundColor="#333333"
-             Title="SongPage">
-
+             Title="SongPage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+    <toolkit:MediaElement x:Name="Player" IsVisible="False" Grid.Row="1" x:FieldModifier="Public"/>
     <Grid RowDefinitions="*,auto">
         <Grid RowDefinitions="auto,auto,auto,auto"
               RowSpacing="20"
@@ -54,11 +55,12 @@
                              BackgroundColor="Transparent"
                              Clicked="Previous_Clicked"/>
                 <ImageButton Grid.Column="1"
+                             x:Name="PlayButton"
                              Source="play_icon.png"
                              WidthRequest="35"
                              HeightRequest="35"
                              BackgroundColor="Transparent"
-                             Clicked="Play_Clicked"/>
+                             Clicked="PlayButton_Clicked"/>
                 <ImageButton Grid.Column="2"
                              Source="next_icon.png"
                              WidthRequest="25"

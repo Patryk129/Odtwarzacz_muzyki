@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Odtwarzacz_muzyki.PlaylistPage"
+             BackgroundColor="#2F2D2D">
+
+    <Grid RowDefinitions="auto,*,auto">
+
+        <!-- Górny pasek + dodawanie playlisty -->
+        <Grid Grid.Row="0" Padding="15" ColumnDefinitions="*,auto">
+            <Label Text="Playlisty" TextColor="White" FontSize="28"/>
+            <Button Text="➕" Clicked="AddPlaylist_Clicked"
+                    BackgroundColor="#444" TextColor="White"
+                    WidthRequest="40" HeightRequest="40"/>
+        </Grid>
+
+        <!-- Główna zawartość -->
+        <Grid Grid.Row="1" x:Name="MainGrid">
+
+            <!-- Lista playlist -->
+            <CollectionView x:Name="PlaylistList">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10" BackgroundColor="#333533" HeightRequest="80">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Obraz playlisty -->
+                            <Image Grid.Column="0" Source="{Binding ImagePath}" WidthRequest="60" HeightRequest="60"/>
+                            <Label Grid.Column="1" Text="{Binding Name}" TextColor="White" VerticalOptions="Center" FontSize="18"/>
+                            <Button Grid.Column="1" Text="Otwórz" HorizontalOptions="End" VerticalOptions="Center" Clicked="OpenPlaylist_Clicked"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Wybrana playlista: ukrywana / pokazywana -->
+            <VerticalStackLayout x:Name="PlaylistDetails" IsVisible="False" Padding="10">
+                <Grid ColumnDefinitions="*,auto" Padding="10">
+                    <Label x:Name="PlaylistTitle" TextColor="White" FontSize="26"/>
+                    <Button Text="⟵" Clicked="Back_Clicked"
+                            BackgroundColor="#444" TextColor="White"
+                            WidthRequest="40" HeightRequest="40"
+                            Grid.Column="1"/>
+                </Grid>
+
+                <Button Text="➕ Dodaj piosenkę" Clicked="AddSong_Clicked"
+                        BackgroundColor="#333" TextColor="White" Margin="0,10"/>
+
+                <CollectionView x:Name="SongsList">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Margin="5" Padding="10" BackgroundColor="#4A4A4A" CornerRadius="10">
+                                <Grid ColumnDefinitions="*,auto,auto">
+                                    <Label Text="{Binding Title}" TextColor="White"/>
+
+                                    <Button Text="▶"
+                                            Grid.Column="1"
+                                            BackgroundColor="#555"
+                                            TextColor="White"
+                                            Clicked="PlaySong_Clicked"/>
+
+                                    <Button Text="🗑"
+                                            Grid.Column="2"
+                                            BackgroundColor="#700"
+                                            TextColor="White"
+                                            Clicked="DeleteSong_Clicked"/>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+        </Grid>
+
+    </Grid>
+</ContentPage>
